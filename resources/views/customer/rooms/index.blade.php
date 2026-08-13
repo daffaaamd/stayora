@@ -20,26 +20,34 @@
 </section>
 
 {{-- Search & Filter Bar --}}
-<section class="bg-white border-b border-charcoal-100 sticky top-16 z-40 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <form action="{{ route('rooms.index') }}" method="GET" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 items-end">
+<section class="bg-white border-b border-charcoal-100 sticky top-16 sm:top-20 z-40 shadow-sm" x-data="{ filterOpen: false }">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+        <div class="flex items-center justify-between lg:hidden mb-1">
+            <button @click="filterOpen = !filterOpen" class="flex items-center gap-2 text-xs font-semibold text-charcoal-800 bg-warm-100 hover:bg-warm-200 px-4 py-2.5 rounded-xl border border-charcoal-200 w-full justify-center transition-colors">
+                <svg class="w-4 h-4 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+                <span x-text="filterOpen ? 'Hide Search & Filters' : 'Tap to Filter Dates & Rooms'"></span>
+            </button>
+        </div>
+        <form action="{{ route('rooms.index') }}" method="GET"
+              :class="{ 'hidden lg:grid': !filterOpen, 'grid': filterOpen }"
+              class="grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 items-end pt-2 lg:pt-0">
             <div>
                 <label class="block text-[11px] font-semibold uppercase tracking-wider text-charcoal-500 mb-1">Check-in</label>
                 <input type="date" name="check_in"
                        value="{{ request('check_in', $checkIn) }}"
                        min="{{ now()->format('Y-m-d') }}"
-                       class="w-full rounded-md border-charcoal-200 text-xs py-2 focus:border-gold-500 focus:ring-gold-500">
+                       class="w-full rounded-lg border-charcoal-200 text-xs py-2 focus:border-gold-500 focus:ring-gold-500">
             </div>
             <div>
                 <label class="block text-[11px] font-semibold uppercase tracking-wider text-charcoal-500 mb-1">Check-out</label>
                 <input type="date" name="check_out"
                        value="{{ request('check_out', $checkOut) }}"
                        min="{{ now()->addDay()->format('Y-m-d') }}"
-                       class="w-full rounded-md border-charcoal-200 text-xs py-2 focus:border-gold-500 focus:ring-gold-500">
+                       class="w-full rounded-lg border-charcoal-200 text-xs py-2 focus:border-gold-500 focus:ring-gold-500">
             </div>
             <div>
                 <label class="block text-[11px] font-semibold uppercase tracking-wider text-charcoal-500 mb-1">Guests</label>
-                <select name="guests" class="w-full rounded-md border-charcoal-200 text-xs py-2 focus:border-gold-500 focus:ring-gold-500">
+                <select name="guests" class="w-full rounded-lg border-charcoal-200 text-xs py-2 focus:border-gold-500 focus:ring-gold-500">
                     <option value="">Any</option>
                     <option value="1" {{ request('guests', $guests) == 1 ? 'selected' : '' }}>1 Guest</option>
                     <option value="2" {{ request('guests', $guests) == 2 ? 'selected' : '' }}>2 Guests</option>
@@ -49,7 +57,7 @@
             </div>
             <div>
                 <label class="block text-[11px] font-semibold uppercase tracking-wider text-charcoal-500 mb-1">Room Type</label>
-                <select name="room_type" class="w-full rounded-md border-charcoal-200 text-xs py-2 focus:border-gold-500 focus:ring-gold-500">
+                <select name="room_type" class="w-full rounded-lg border-charcoal-200 text-xs py-2 focus:border-gold-500 focus:ring-gold-500">
                     <option value="">All Types</option>
                     @foreach($roomTypes as $type)
                         <option value="{{ $type->id }}" {{ request('room_type') == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
@@ -58,7 +66,7 @@
             </div>
             <div>
                 <label class="block text-[11px] font-semibold uppercase tracking-wider text-charcoal-500 mb-1">Sort By</label>
-                <select name="sort" class="w-full rounded-md border-charcoal-200 text-xs py-2 focus:border-gold-500 focus:ring-gold-500">
+                <select name="sort" class="w-full rounded-lg border-charcoal-200 text-xs py-2 focus:border-gold-500 focus:ring-gold-500">
                     <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Price: Low to High</option>
                     <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Price: High to Low</option>
                     <option value="rating" {{ request('sort') == 'rating' ? 'selected' : '' }}>Highest Rating</option>
@@ -66,7 +74,7 @@
                 </select>
             </div>
             <div>
-                <button type="submit" class="w-full btn-primary btn-sm py-2 justify-center">
+                <button type="submit" class="w-full btn-primary btn-sm py-2.5 rounded-lg justify-center font-semibold">
                     Filter & Search
                 </button>
             </div>

@@ -11,12 +11,18 @@
 <body class="font-body text-charcoal-900 bg-warm-100 min-h-screen" x-data="{ sidebarOpen: true, mobileSidebar: false }">
     <div class="flex min-h-screen">
         {{-- Sidebar --}}
-        <aside class="hidden lg:flex lg:flex-col w-64 bg-white border-r border-charcoal-100 fixed inset-y-0 z-30"
-               :class="{ 'lg:w-64': sidebarOpen, 'lg:w-20': !sidebarOpen }">
+        <aside class="fixed inset-y-0 left-0 z-50 flex flex-col bg-white border-r border-charcoal-100 transition-all duration-300 transform lg:translate-x-0"
+               :class="{ 'translate-x-0': mobileSidebar, '-translate-x-full': !mobileSidebar, 'lg:w-64': sidebarOpen, 'lg:w-20': !sidebarOpen, 'w-64': true }">
             {{-- Logo --}}
-            <div class="flex items-center gap-2 px-6 h-16 border-b border-charcoal-100">
-                <span class="font-display text-lg font-bold text-charcoal-900">Stayora</span>
-                <span class="text-gold-500 font-display text-xs font-medium" x-show="sidebarOpen">Resort</span>
+            <div class="flex items-center justify-between px-6 h-16 border-b border-charcoal-100">
+                <div class="flex items-center gap-2">
+                    <span class="font-display text-lg font-bold text-charcoal-900">Stayora</span>
+                    <span class="text-gold-500 font-display text-xs font-medium" x-show="sidebarOpen">Resort</span>
+                </div>
+                {{-- Close Button for Mobile --}}
+                <button @click="mobileSidebar = false" class="lg:hidden text-charcoal-500 hover:text-charcoal-800 p-1">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
             </div>
             {{-- Nav --}}
             <nav class="flex-1 px-3 py-4 space-y-1 overflow-y-auto">

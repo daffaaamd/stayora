@@ -94,18 +94,18 @@
                 <p class="text-charcoal-600 leading-relaxed mb-8 text-base">
                     Whether you seek restorative tranquility in our holistic wellness spa, culinary journeys curated by world-class chefs, or private beachside moments under the stars, Stayora is tailored to create lasting memories.
                 </p>
-                <div class="grid grid-cols-3 gap-6 pt-4 border-t border-charcoal-100">
+                <div class="grid grid-cols-3 gap-2 sm:gap-6 pt-4 border-t border-charcoal-100 text-center sm:text-left">
                     <div>
-                        <p class="font-display text-3xl font-bold text-charcoal-900">30+</p>
-                        <p class="text-xs text-charcoal-500 uppercase tracking-wider mt-1">Luxury Suites</p>
+                        <p class="font-display text-2xl sm:text-3xl font-bold text-charcoal-900">30+</p>
+                        <p class="text-[10px] sm:text-xs text-charcoal-500 uppercase tracking-wider mt-0.5 sm:mt-1">Suites & Villas</p>
                     </div>
                     <div>
-                        <p class="font-display text-3xl font-bold text-charcoal-900">5★</p>
-                        <p class="text-xs text-charcoal-500 uppercase tracking-wider mt-1">Resort Standard</p>
+                        <p class="font-display text-2xl sm:text-3xl font-bold text-charcoal-900">5★</p>
+                        <p class="text-[10px] sm:text-xs text-charcoal-500 uppercase tracking-wider mt-0.5 sm:mt-1">Standard</p>
                     </div>
                     <div>
-                        <p class="font-display text-3xl font-bold text-charcoal-900">100%</p>
-                        <p class="text-xs text-charcoal-500 uppercase tracking-wider mt-1">Guest Satisfaction</p>
+                        <p class="font-display text-2xl sm:text-3xl font-bold text-charcoal-900">100%</p>
+                        <p class="text-[10px] sm:text-xs text-charcoal-500 uppercase tracking-wider mt-0.5 sm:mt-1">Satisfaction</p>
                     </div>
                 </div>
             </div>
